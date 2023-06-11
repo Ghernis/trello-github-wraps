@@ -62,10 +62,20 @@ class TrelloClient():
         res = requests.request("GET",url,headers=self.headers,params=self.basic_query,timeout=200)
         return json.loads(res.text)
     
+    def getCardsBoard(self,idBoard):
+        url = f"https://api.trello.com/1/boards/{idBoard}/cards"
+        res = requests.request("GET",url,params=self.basic_query,timeout=200)
+        return json.loads(res.text)
+    def getCardsList(self,idList):
+        url = f"https://api.trello.com/1/lists/{idList}/cards"
+        res = requests.request("GET",url,headers=self.headers,params=self.basic_query,timeout=200)
+        return json.loads(res.text)
+
+
     def checkFormat(self,titulo,desc,dla):
-        MAX_DAY_WO_ACTIVITY=30
+        MAX_DAY_WO_ACTIVITY=14
         error={
-            'titulo':{},
+            'titulo':titulo,
             'body':{},
             'ultimaActividad':{}
         }
@@ -73,14 +83,13 @@ class TrelloClient():
         dateTicket=datetime.datetime(int(lastActivity[0]),int(lastActivity[1]),int(lastActivity[2]))
         dateNow=datetime.datetime.now()
         diffDay=dateNow-dateTicket
-        print(diffDay.days)
         if diffDay.days>MAX_DAY_WO_ACTIVITY:
             error['ultimaActividad']['check']=True
-            error['ultimaActividad']['comment']=f'El ticken no tiene actividad hace mas de {MAX_DAY_WO_ACTIVITY}'
+            error['ultimaActividad']['comment']=f'El ticken no tiene actividad hace mas de {MAX_DAY_WO_ACTIVITY} dias'
         else:
             error['ultimaActividad']['check']=False
             error['ultimaActividad']['comment']=f''
-        if '# Acceptance Criteria' in desc and '# Motivation' in desc:
+        if '## Acceptance Criteria' in desc and '## Motivation' in desc:
             error['body']['check']=False
             error['body']['comment']=''
         else:
