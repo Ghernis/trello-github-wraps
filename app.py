@@ -6,8 +6,8 @@ tc = TC(tickets=data)
 #card=tc.getCard('#idcard')
 #check=tc.checkFormat(card['name'],card['desc'],card['dateLastActivity'])
 #print(check)
-cards=tc.getCardsList('#idlist')
+cards=tc.getCardsList('#idList')
 for c in cards:
-    errors=tc.checkFormat(c['name'],c['desc'],c['dateLastActivity'])
+    errors=tc.checkFormat(c)
     if errors['body']['check'] or errors['ultimaActividad']['check']:
         print(errors)

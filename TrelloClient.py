@@ -72,14 +72,19 @@ class TrelloClient():
         return json.loads(res.text)
 
 
-    def checkFormat(self,titulo,desc,dla):
+    def checkFormat(self,card):
+
         MAX_DAY_WO_ACTIVITY=14
         error={
-            'titulo':titulo,
+            'cardInfo':{
+                'titulo':card['name'],
+                'cardId':card['id'],
+                'urlLink':card['url']
+            },
             'body':{},
             'ultimaActividad':{}
         }
-        lastActivity=dla[0:10].split('-')
+        lastActivity=card['dateLastActivity'][0:10].split('-')
         dateTicket=datetime.datetime(int(lastActivity[0]),int(lastActivity[1]),int(lastActivity[2]))
         dateNow=datetime.datetime.now()
         diffDay=dateNow-dateTicket
@@ -89,7 +94,7 @@ class TrelloClient():
         else:
             error['ultimaActividad']['check']=False
             error['ultimaActividad']['comment']=f''
-        if '## Acceptance Criteria' in desc and '## Motivation' in desc:
+        if '## Acceptance Criteria' in card['desc'] and '## Motivation' in card['desc']:
             error['body']['check']=False
             error['body']['comment']=''
         else:
