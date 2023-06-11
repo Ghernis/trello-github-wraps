@@ -1,4 +1,5 @@
 from typing import List
+import datetime
 import json
 #pylint: disable=import-error
 from dotenv import dotenv_values
@@ -56,6 +57,38 @@ class TrelloClient():
         url = f"https://api.trello.com/1/cards/{card_id}/stickers"
         return requests.request("POST",url,headers=self.headers,params=query_sticker,timeout=200)
 
+    def getCard(self,idCard):
+        url=f"https://api.trello.com/1/cards/{idCard}"
+        res = requests.request("GET",url,headers=self.headers,params=self.basic_query,timeout=200)
+        return json.loads(res.text)
+    
+    def checkFormat(self,titulo,desc,dla):
+        MAX_DAY_WO_ACTIVITY=30
+        error={
+            'titulo':{},
+            'body':{},
+            'ultimaActividad':{}
+        }
+        lastActivity=dla[0:10].split('-')
+        dateTicket=datetime.datetime(int(lastActivity[0]),int(lastActivity[1]),int(lastActivity[2]))
+        dateNow=datetime.datetime.now()
+        diffDay=dateNow-dateTicket
+        print(diffDay.days)
+        if diffDay.days>MAX_DAY_WO_ACTIVITY:
+            error['ultimaActividad']['check']=True
+            error['ultimaActividad']['comment']=f'El ticken no tiene actividad hace mas de {MAX_DAY_WO_ACTIVITY}'
+        else:
+            error['ultimaActividad']['check']=False
+            error['ultimaActividad']['comment']=f''
+        if '# Acceptance Criteria' in desc and '# Motivation' in desc:
+            error['body']['check']=False
+            error['body']['comment']=''
+        else:
+            error['body']['check']=True
+            error['body']['comment']=f'Formato incorrecto del body'
+        return error
+
+
     def getTags(self,tablero=config['tablero']):
         url_tags = f"https://api.trello.com/1/boards/{tablero}/labels"
         tags = requests.request("GET",url_tags,params=self.basic_query)
@@ -97,6 +130,7 @@ class TrelloClient():
         self.makeTags(card_id,card,res_tags)
         print('assign a member to the card')
         self.assignMember(card_id)
+
 
 #tc.createCards(tc.tickets[0])
 #card_id=tc.createCard(tc.tickets[1],config['list'])

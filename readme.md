@@ -12,3 +12,6 @@ sticker=idTrelloCustomSticker
 member=idTrelloMemberToAdd
 color_tags=blue_light #Default Color of tags
 ```
+## Check ticket format
+
+![image](doc/images/checkformat.png)

@@ -3,4 +3,6 @@ from TrelloClient import TrelloClient as TC
 
 data = Ticket.load('./data.json')
 tc = TC(tickets=data)
-print(tc.tickets)
+card=tc.getCard('#idcard')
+check=tc.checkFormat(card['name'],card['desc'],card['dateLastActivity'])
+print(check)
