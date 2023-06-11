@@ -12,6 +12,6 @@ sticker=idTrelloCustomSticker
 member=idTrelloMemberToAdd
 color_tags=blue_light #Default Color of tags
 ```
-## Check ticket format
+## Check all tickets in a list for format and last activity
 
-![image](doc/images/checkformat.png)
+![check ticket](doc/images/2023-06-11-20-03-57.png)
