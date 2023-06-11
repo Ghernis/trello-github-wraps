@@ -1,0 +1,68 @@
+[
+    {
+        "titulo":"Create venv",
+        "motivation":"Necesitamos un virtual environment para aislar nuestras dependencias y lockearlas",
+        "ac":[
+            "Hay un screen en los comentarios del venv activado",
+            "Hay un PR con la carpeta venv ignorada dentro del archivo `.gitignore`"
+        ],
+        "to":"ceci",
+        "tags":["Bot Discord","MVP","Learn Python 3"],
+        "cmd":"Para crear un venv el comando que vamos a usar es `python -m venv venv` donde el -m es para indicar que vamos a correr un modulo de python, el modulo en este caso es venv y como nombre a nuestro v environment le ponemos venv tambien.\nUna vez creado, para entrar a nuestro v env el comando es `. venv/bin/activate` en linux y `. venv/Scripts/activate` en windows.\nSi queremos salir del venv solo basta escribir `deactivate` en la consola.\nNo olvideis volver a instalar todas las dependencias en el venv!!"
+    },
+    {
+        "titulo":"Add requirements.txt",
+        "motivation":"Una vez tengamos instaladas las dependencias necesarias en el venv, necesitamos crear un archivo que describa todas las librerias instaladas y sus versiones para que cualquiera pueda instalar las mismas dependencias",
+        "ac":[
+            "Hay un screen en los comentarios con el contenido del archivo requirements.txt",
+            "Hay un PR con el archivo requirements.txt incluido al repo"
+        ],
+        "to":"ceci",
+        "tags":["Bot Discord","MVP","Learn Python 3"],
+        "cmd":"Una vez instaladas las librerias en nuestro venv tenemos que correr el comando `python -m pip freeze > requirements.txt` en linux y ve tu a saber como es en windows.\nEste comando escribe las librerias y su version en un archivo requirements.txt\nPara instalar las librerias que guardamos basta con `python -m pip install -r requirements.txt`"
+    },
+    {
+        "titulo":"Add readme.md",
+        "motivation":"Necesitamos decirle a las masas como funciona nuestro bot. O a cualquiera que quiera bajarlo para checkear un PR",
+        "ac":[
+            "Hay un PR con el archivo readme.md incluido al repo",
+            "El archivo tiene que incluir por lo menos que variables de entorno se necesitan y como correr el bot",
+            "En los comentarios hay un screen con el readme"
+        ],
+        "to":"ceci",
+        "tags":["Bot Discord","MVP","Learn Python 3"]
+    },
+    {
+        "titulo":"Mod para Slash commands",
+        "motivation":"Debido a nueva informacion que llego a manos de gherni, vamos a cambiar como interactua el bot\n> Recently, Discord has introduced **Interactions** and **Slash Commands** to ease users' experience with bots. Partially, the reason was to secure users' privacy — bots are now slightly forced to abandon flags for _reading messages_ in Discord Servers — which was previously a point of concern regarding unlawful data processing by bot developers.\n> These are the most known features, but on top of that, the update has added a possibility to interact with mentioned Interactions through the Interactions Endpoint URL.\nEl articulo completo es: https://betterprogramming.pub/build-a-discord-bot-with-aws-lambda-api-gateway-cc1cff750292\n\nEsto significa que vamos a dejar de leer el chat con el bot y a solo usar commands.",
+        "ac":[
+            "El bot arranca con `commands.Bot` en vez de `discord.Client`",
+            "Se paso la implementacion de las preguntas a un commando",
+            "Hay un screen del slash command funcionando con su descripcion",
+            "Hay un PR con las modificaciones nombradas"
+        ],
+        "to":"ceci",
+        "tags":["Bot Discord","MVP"]
+    },
+    {
+        "titulo":"Add repo to /codemia",
+        "motivation":"Los proyectos tienen que estar en la organizacion codemia",
+        "ac":[
+            "Hay un screen de un nuevo remote llamado codemia",
+            "En los comentarios hay un link al repositorio dentro de la organizacion codemia"
+        ],
+        "to":"ceci",
+        "tags":["Bot Discord","MVP"],
+        "cmd":"Para crear un nuevo remote:`git remode add codemia <url repo>` \nDe ahora en mas los push seran a esa repo: `git push codemia <rama>`"
+    },
+    {
+        "titulo":"Add preguntas module funcionesPreguntas.py y slash command",
+        "motivation":"Necesitamos una funcion que agregue una pregunta nueva desde un slash command",
+        "ac":[
+            "Hay un screen en los comentarios con el slash command y su descripcion",
+            "Hay un PR con los cambios nombrados"
+        ],
+        "to":"ceci",
+        "tags":["Bot Discord","MVP"]
+    }
+]
