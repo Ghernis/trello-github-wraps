@@ -98,10 +98,6 @@ class TrelloClient():
         print('assign a member to the card')
         self.assignMember(card_id)
 
-def readData():
-    return Ticket.load('./ceci.json')
-
-tc = TrelloClient(tickets=readData())
 #tc.createCards(tc.tickets[0])
 #card_id=tc.createCard(tc.tickets[1],config['list'])
 #tc.attachSticker('64857b3e95d4715fc0d564de')
